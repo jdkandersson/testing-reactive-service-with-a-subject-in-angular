@@ -1,7 +1,7 @@
 // name.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,9 @@ export class NameService {
 
   loadName() {
     this.httpClient.get<string>('name URL')
-      .subscribe(name => this.mName$.next(name));
+      .subscribe(
+        name => this.mName$.next(name),
+        () => null
+      );
   }
 }
