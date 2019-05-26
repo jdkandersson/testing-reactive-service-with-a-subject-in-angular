@@ -16,13 +16,13 @@ describe('NameService', () => {
   describe('loadName', () => {
     it('should call get on HttpClient with correct URL', () => {
       // Setting up get spy
-      const getSpy = httpClientSpy.get.and.returnValue(cold('a|', {a: null}));
+      httpClientSpy.get.and.returnValue(cold('a|', {a: null}));
 
       // Calling loadName
       service.loadName();
 
       // Checking get call
-      expect(getSpy).toHaveBeenCalledWith('name URL');
+      expect(httpClientSpy.get).toHaveBeenCalledWith('name URL');
     });
 
     it('should emit new name on name$', () => {
