@@ -27,8 +27,8 @@ describe('NameService', () => {
 
     it('should emit new name on name$', () => {
       // Defining marbles
-      const getSpyMarbles =   'a|';
-      const expectedMarbles = 'b';
+      const getSpyMarbles =   '-a|';
+      const expectedMarbles = 'bc';
       // Setting up get spy
       httpClientSpy.get.and.returnValue(cold(getSpyMarbles, {a: 'name'}));
 
@@ -36,7 +36,22 @@ describe('NameService', () => {
       service.loadName();
 
       // Checking get call
-      const expected = cold(expectedMarbles, {b: 'name'});
+      const expected = cold(expectedMarbles, {b: null, c: 'name'});
+      expect(service.name$).toBeObservable(expected);
+    });
+
+    it('should emit nothing on name$ if an error occurs', () => {
+      // Defining marbles
+      const getSpyMarbles =   '-#|';
+      const expectedMarbles = 'a';
+      // Setting up get spy
+      httpClientSpy.get.and.returnValue(cold(getSpyMarbles));
+
+      // Calling loadName
+      service.loadName();
+
+      // Checking get call
+      const expected = cold(expectedMarbles, {a: null});
       expect(service.name$).toBeObservable(expected);
     });
   });
