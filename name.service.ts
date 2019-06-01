@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 export class NameService {
   private mName$ = new BehaviorSubject<string>(null);
 
-  get name$(): Observable<string> {
+  name$(): Observable<string> {
     return this.mName$;
   }
 
