@@ -37,7 +37,7 @@ describe('NameService', () => {
 
       // Checking get call
       const expected = cold(expectedMarbles, {b: null, c: 'name'});
-      expect(service.name$).toBeObservable(expected);
+      expect(service.name$()).toBeObservable(expected);
     });
 
     it('should emit nothing on name$ if an error occurs', () => {
@@ -52,7 +52,7 @@ describe('NameService', () => {
 
       // Checking get call
       const expected = cold(expectedMarbles, {a: null});
-      expect(service.name$).toBeObservable(expected);
+      expect(service.name$()).toBeObservable(expected);
     });
   });
 });
